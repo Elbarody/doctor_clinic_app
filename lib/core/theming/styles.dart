@@ -1,0 +1,28 @@
+import 'package:doctor_opportunity/core/theming/colors.dart';
+import 'package:flutter/material.dart';
+
+class TextStyles {
+  static TextStyle font24Black700Weight = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+
+  static TextStyle font32BlueBold = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    color: ColorsManager.mainBlue,
+  );
+
+  static TextStyle font13GrayRegular = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.normal,
+    color: ColorsManager.gray,
+  );
+
+  static TextStyle font16WhiteSemiBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
+}
