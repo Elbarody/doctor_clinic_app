@@ -1,3 +1,5 @@
+import 'package:doctor_opportunity/core/helpers/extensions.dart';
+import 'package:doctor_opportunity/core/routing/routes.dart';
 import 'package:doctor_opportunity/core/theming/colors.dart';
 import 'package:doctor_opportunity/core/theming/styles.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,7 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, '/loginScreen');
+        context.pushNamed(Routes.loginScreen);
       },
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(ColorsManager.mainBlue),
