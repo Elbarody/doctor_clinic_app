@@ -1,23 +1,18 @@
 import 'package:doctor_opportunity/core/theming/Spacing.dart';
-import 'package:doctor_opportunity/core/theming/colors.dart';
 import 'package:doctor_opportunity/core/theming/styles.dart';
 import 'package:doctor_opportunity/core/wedgets/app_text_button.dart';
-import 'package:doctor_opportunity/core/wedgets/app_text_form_field.dart';
+import 'package:doctor_opportunity/features/login/data/models/login_request_body.dart';
+import 'package:doctor_opportunity/features/login/logic/cubit/login_cubit.dart';
 import 'package:doctor_opportunity/features/login/ui/widgets/aleardy_have_account_text.dart';
+import 'package:doctor_opportunity/features/login/ui/widgets/email_and_password.dart';
+import 'package:doctor_opportunity/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:doctor_opportunity/features/login/ui/widgets/terms_and_conditions_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final formKey = GlobalKey<FormState>();
-  bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -36,53 +31,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyles.font14GrayRegular,
                 ),
                 verticalSpace(38),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      AppTextFormField(hintText: 'Email'),
-                      verticalSpace(18),
-                      AppTextFormField(
-                        hintText: 'Password',
-                        obscureText: isObscureText,
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isObscureText = !isObscureText;
-                            });
-                          },
-                          child: Icon(
-                            isObscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: ColorsManager.gray,
-                          ),
-                        ),
+                Column(
+                  children: [
+                    const EmailAndPassword(),
+                    verticalSpace(24),
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyles.font13BlueRegular,
                       ),
-                      verticalSpace(24),
-                      Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyles.font13BlueRegular,
-                        ),
-                      ),
-                      verticalSpace(38),
-                      AppTextButton(
-                        text: 'Login',
-                        textStyle: TextStyles.font16WhiteSemiBold,
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            // Perform login action
-                          }
-                        },
-                      ),
-                      verticalSpace(24),
-                      const TermsAndConditionsText(),
-                      verticalSpace(60),
-                      const AleardyHaveAccountText(),
-                    ],
-                  ),
+                    ),
+                    verticalSpace(38),
+                    AppTextButton(
+                      text: 'Login',
+                      textStyle: TextStyles.font16WhiteSemiBold,
+                      onPressed: () {
+                        validateThenDoLogin(context);
+                      },
+                    ),
+                    verticalSpace(24),
+                    const TermsAndConditionsText(),
+                    verticalSpace(60),
+                    const AleardyHaveAccountText(),
+                    const LoginBlocListener(),
+                  ],
                 ),
               ],
             ),
@@ -90,5 +63,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void validateThenDoLogin(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubit>().emitLoginStates(LoginRequestBody(
+          email: context.read<LoginCubit>().emailController.text,
+          password: context.read<LoginCubit>().passwordController.text));
+    }
   }
 }
