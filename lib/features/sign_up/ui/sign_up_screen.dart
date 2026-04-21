@@ -1,17 +1,17 @@
 import 'package:doctor_opportunity/core/theming/Spacing.dart';
 import 'package:doctor_opportunity/core/theming/styles.dart';
 import 'package:doctor_opportunity/core/wedgets/app_text_button.dart';
-import 'package:doctor_opportunity/features/login/logic/cubit/login_cubit.dart';
-import 'package:doctor_opportunity/features/login/ui/widgets/dont_have_account_text.dart';
-import 'package:doctor_opportunity/features/login/ui/widgets/email_and_password.dart';
-import 'package:doctor_opportunity/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:doctor_opportunity/features/login/ui/widgets/terms_and_conditions_text.dart';
+import 'package:doctor_opportunity/features/sign_up/logic/cubit/sign_up_cubit.dart';
+import 'package:doctor_opportunity/features/sign_up/ui/widgets/aleardy_have_account_text.dart';
+import 'package:doctor_opportunity/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
+import 'package:doctor_opportunity/features/sign_up/ui/widgets/sign_up_inputs_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,37 +23,29 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Welcom Back', style: TextStyles.font24BlueBold),
+                Text('Create Account', style: TextStyles.font24BlueBold),
                 verticalSpace(8),
                 Text(
-                  'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
+                  'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!',
                   style: TextStyles.font14GrayRegular,
                 ),
                 verticalSpace(38),
                 Column(
                   children: [
-                    const EmailAndPassword(),
-                    verticalSpace(24),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyles.font13BlueRegular,
-                      ),
-                    ),
-                    verticalSpace(38),
+                    const SignUpInputsForm(),
+                    verticalSpace(30),
                     AppTextButton(
-                      text: 'Login',
+                      text: 'Create account',
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
-                        validateThenDoLogin(context);
+                        validateThenDoSignUp(context);
                       },
                     ),
                     verticalSpace(24),
                     const TermsAndConditionsText(),
                     verticalSpace(60),
-                    const DontHaveAccountText(),
-                    const LoginBlocListener(),
+                    const AleardyHaveAccountText(),
+                    const SignupBlocListener()
                   ],
                 ),
               ],
@@ -64,9 +56,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void validateThenDoLogin(BuildContext context) {
-    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
-      context.read<LoginCubit>().emitLoginStates();
+  void validateThenDoSignUp(BuildContext context) {
+    if (context.read<SignUpCubit>().formKey.currentState?.validate() == true) {
+      context.read<SignUpCubit>().emitSignUpStates();
     }
   }
 }

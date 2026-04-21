@@ -11,6 +11,16 @@ class AppRegex {
     return passwordRegex.hasMatch(password);
   }
 
+  static bool isValidName(String name) {
+    final nameRegex = RegExp(r'^[a-zA-Z\s]+$');
+    return nameRegex.hasMatch(name);
+  }
+
+  static bool isValidPhoneNumber(String phoneNumber) {
+    final phoneRegex = RegExp(r'^01[0-2,5]\d{8}$');
+    return phoneRegex.hasMatch(phoneNumber);
+  }
+
   static bool hasMinLength(String password, int minLength) {
     return password.length >= minLength;
   }
