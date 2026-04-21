@@ -9,6 +9,9 @@ class PasswordValidationText extends StatelessWidget {
   final bool hasSpecialCharacter;
   final bool hasNumber;
   final bool hasMinLength;
+  final bool hasConfirmedPassword;
+  final bool? passwordsMatch;
+
   const PasswordValidationText({
     super.key,
     required this.isLowerCase,
@@ -16,6 +19,8 @@ class PasswordValidationText extends StatelessWidget {
     required this.hasSpecialCharacter,
     required this.hasNumber,
     required this.hasMinLength,
+    required this.hasConfirmedPassword,
+    this.passwordsMatch,
   });
 
   @override
@@ -33,6 +38,10 @@ class PasswordValidationText extends StatelessWidget {
         verticalSpace(2),
         buildValidationRow(
             'At least one special character', hasSpecialCharacter),
+        if (hasConfirmedPassword) ...[
+          verticalSpace(2),
+          buildValidationRow('Passwords match', passwordsMatch ?? false),
+        ],
       ],
     );
   }
