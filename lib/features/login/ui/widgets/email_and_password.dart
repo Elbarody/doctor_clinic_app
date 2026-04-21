@@ -18,7 +18,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscureText = true;
 
   late TextEditingController passwordController;
-  late TextEditingController emailController;
 
   bool hasMinLength = false;
   bool isUpperCase = false;
@@ -31,7 +30,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     super.initState();
     passwordController = context.read<LoginCubit>().passwordController;
     setPasswordControllerListener();
-    emailController = context.read<LoginCubit>().emailController;
   }
 
   void setPasswordControllerListener() {
@@ -62,7 +60,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 return 'Please enter a valid email';
               }
             },
-            controller: emailController,
+            controller: context.read<LoginCubit>().emailController,
           ),
           verticalSpace(18),
           AppTextFormField(
@@ -97,6 +95,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             hasSpecialCharacter: hasSpecialCharacter,
             hasNumber: hasNumber,
             hasMinLength: hasMinLength,
+            hasConfirmedPassword: false,
           ),
         ],
       ),
