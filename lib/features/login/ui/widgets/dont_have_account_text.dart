@@ -1,5 +1,4 @@
 import 'package:doctor_opportunity/core/helpers/extensions.dart';
-import 'package:doctor_opportunity/core/routing/app_router.dart';
 import 'package:doctor_opportunity/core/routing/routes.dart';
 import 'package:doctor_opportunity/core/theming/styles.dart';
 import 'package:flutter/gestures.dart';
