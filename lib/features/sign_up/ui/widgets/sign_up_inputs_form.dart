@@ -168,4 +168,11 @@ class _SignUpInputsFormState extends State<SignUpInputsForm> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 }
