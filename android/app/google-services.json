@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "558040243904",
+    "project_id": "flutter-app-distribution-2af0c",
+    "storage_bucket": "flutter-app-distribution-2af0c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558040243904:android:968af3ec90f863434a9725",
+        "android_client_info": {
+          "package_name": "com.example.doctor_opportunity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrOd5TrkG1CZQQqb14dNQDAIHhMjMWL5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
